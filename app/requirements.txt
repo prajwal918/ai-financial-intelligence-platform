@@ -1,0 +1,11 @@
+kafka-python
+s3fs
+pandas
+streamlit
+plotly
+google-generativeai
+feedparser
+beautifulsoup4
+requests
+fastapi
+uvicorn
