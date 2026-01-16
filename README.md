@@ -6,6 +6,7 @@
 A **production-grade financial intelligence system** that combines **AI/ML**, **Big Data**, **Real-time Streaming**, **Modern Web Development**, and **Complete Computer Science Fundamentals** (Data Structures, Algorithms, OOP) into one comprehensive platform.
 
 ### ✨ Key Features
+![Uploading image.png…]()
 
 #### **1. AI & Real-time Features**
 - **Real-Time AI Sentiment Analysis**: Google Gemini 2.5 analyzes financial news across 12+ assets
