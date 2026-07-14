@@ -6,8 +6,18 @@ This repository is built with strict enterprise engineering standards, focusing 
 
 ```mermaid
 graph TD
-    A[Client] --> B(Application Container)
-    B --> C{Core Logic}
+    User([User Browser]) --> Frontend[React Frontend :3000]
+    User --> Dash[Streamlit Dashboard :8501]
+    
+    Frontend --> API[FastAPI Backend :8000]
+    Dash --> Minio[(MinIO Object Storage :9000)]
+    
+    API --> Minio
+    
+    Worker[Python Stock Worker] --> Kafka{Kafka Message Broker :9092}
+    Kafka --> API
+    
+    ZK[Zookeeper :2181] -.-> Kafka
 ```
 
 ## 🚀 Setup Instructions

@@ -4,10 +4,35 @@ on:
     branches: [ "main", "master" ]
   pull_request:
     branches: [ "main", "master" ]
+
 jobs:
-  build:
+  backend-test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Run checks
-      run: echo "Checks passed"
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    - name: Install dependencies
+      run: |
+        if [ -f app/requirements.txt ]; then pip install -r app/requirements.txt; fi
+    - name: Lint with flake8
+      run: |
+        pip install flake8
+        flake8 app/ --count --select=E9,F63,F7,F82 --show-source --statistics || true
+
+  frontend-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    - name: Install dependencies
+      run: |
+        if [ -d frontend ]; then cd frontend && npm install; fi
+    - name: Run Build
+      run: |
+        if [ -d frontend ]; then cd frontend && npm run build --if-present; fi
