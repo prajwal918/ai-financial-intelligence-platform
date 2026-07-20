@@ -9,7 +9,7 @@ jobs:
   backend-test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v7
       continue-on-error: true
     - name: Set up Python
       continue-on-error: true
@@ -29,7 +29,7 @@ jobs:
   frontend-test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v7
       continue-on-error: true
     - name: Set up Node.js
       continue-on-error: true
