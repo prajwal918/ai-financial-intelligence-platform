@@ -1,8 +1,12 @@
-version: '3'
+version: '3.8'
+
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:7.3.0
     container_name: zookeeper
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -10,6 +14,9 @@ services:
   broker:
     image: confluentinc/cp-kafka:7.3.0
     container_name: broker
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
     ports:
       - "9092:9092"
     depends_on:
@@ -26,6 +33,9 @@ services:
   minio:
     image: minio/minio
     container_name: minio
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
     ports:
       - "9000:9000"
       - "9001:9001"
@@ -37,6 +47,9 @@ services:
   stock-app:
     build: ./app
     container_name: stock-app
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
     depends_on:
       - broker
       - minio
@@ -47,6 +60,9 @@ services:
   dashboard:
     build: ./app
     container_name: dashboard
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
     ports:
       - "8501:8501"
     depends_on:
@@ -58,6 +74,9 @@ services:
   api:
     build: ./app
     container_name: api
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
     ports:
       - "8000:8000"
     depends_on:
@@ -69,6 +88,9 @@ services:
   frontend:
     build: ./frontend
     container_name: frontend
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
     ports:
       - "3000:3000"
     depends_on:
